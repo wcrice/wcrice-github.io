@@ -13,6 +13,7 @@ Hydrologists in the United States of America often define a water year as the da
 
 Start by visiting [NOAA's Climate Data Search Tool](https://www.ncdc.noaa.gov/cdo-web/search?datasetid=GHCND) and downloading a CSV formated file containing daily precipitation.
 
+You can download an example data file [here](https://github.com/wcrice/wcrice.github.io/raw/master/_posts/noaa_stations.csv).
 
 ### Load the necessary libraries
 
