@@ -12,7 +12,7 @@ In the United States of America the common definition of a water year among hydr
 Start by visiting [NOAA's Climate Data Search Tool](https://www.ncdc.noaa.gov/cdo-web/search?datasetid=GHCND) and downloading a CSV formated file containing daily precipitation.
 
 
-# Load the necessary libraries
+## Load the necessary libraries
 
 ```{r}
 
@@ -23,7 +23,7 @@ library(plotly)
 
 ```
 
-# Write a function to add a water year column (for use later in the script)
+## Write a function to add a water year column (for use later in the script)
 
 ```{r}
 wtr_yr <- function(dates, start_month=9) {
@@ -38,54 +38,54 @@ wtr_yr <- function(dates, start_month=9) {
 }
 ```
 
-# Load your data file (downloaded from Noaa)
+## Load your data file (downloaded from Noaa)
 
 ```{r}
 noaa_stations <- read.csv("noaa_stations.csv", header=TRUE)
 ```
 
-# Choose what stations you want to use (useful if you downloaded multiple stations)
+## Choose what stations you want to use (useful if you downloaded multiple stations)
 
 ```{r}
 noaa_station <- subset(noaa_stations, noaa_stations$STATION == "USC00045941")
 ```
 
-# Ensure the dates are stored as dates by using as.Date()
+## Ensure the dates are stored as dates by using as.Date()
 
 ```{r}
 noaa_station$DATE <- as.Date(noaa_station$DATE)
 ```
 
-# Add a column for water year 
+## Add a column for water year 
 ```{r}
 noaa_station$water_year <- wtr_yr(noaa_station$DATE)
 ```
 
-#Add months (this isn't used in this example)
+## Add months (this isn't used in this example)
 
 ```{r}
 noaa_station$month <- months(noaa_station$DATE)
 ```
 
-#Calculate annual sums by water year
+## Calculate annual sums by water year
 
 ```{r}
 noaa_station <- aggregate( PRCP ~ water_year , noaa_station , sum )
 ```
 
-#Calculate precitation in inches if data was downloaded in milimeters
+## Calculate precitation in inches if data was downloaded in milimeters
 
 ```{r}
 noaa_station$PRCP_in <- noaa_station$PRCP/25.4 #Multiply by 25.4 to make mm into inches (if desired)
 ```
 
-# Remove na values
+## Remove na values
 
 ```{r}
 noaa_station <- na.omit(noaa_station)
 ```
 
-# Make a plot showing a 20 year rolling mean
+## Make a plot showing a 20 year rolling mean
 
 ```{r}
 p <- ggplot(noaa_station, aes(x = water_year, y = PRCP_in)) +
