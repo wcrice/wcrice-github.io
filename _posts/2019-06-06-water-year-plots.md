@@ -7,7 +7,9 @@ htmlwidgets: TRUE
 
 ## Estimating Annual Precipitation and Moving Averages using R
 
-In the United States of America the common definition of a water year among hydrologists is from October 1st to September 30th. This script walks you through pulling data from the NOAA Climate Data search tool and building a graph showing annual precipitation over each water year in the dataset.
+This script walks through producing a water plot of water years from precipitation data and plotting a moving average across that period. Some amount of data cleaning is required to use the raw data from National Oceanic and Atmospheric Administration (NOAA).
+
+Hydrologists in the United States of America often define a water year as the dates between October 1st to September 30th with the year being at the end of the period (September 30th). This script walks you through pulling data from the NOAA Climate Data search tool and building a graph showing annual precipitation over each water year in the dataset.
 
 Start by visiting [NOAA's Climate Data Search Tool](https://www.ncdc.noaa.gov/cdo-web/search?datasetid=GHCND) and downloading a CSV formated file containing daily precipitation.
 
@@ -38,7 +40,7 @@ wtr_yr <- function(dates, start_month=9) {
 }
 ```
 
-### Load your data file (downloaded from Noaa)
+### Load your data file (downloaded from NOAA)
 
 ```{r}
 noaa_stations <- read.csv("noaa_stations.csv", header=TRUE)
