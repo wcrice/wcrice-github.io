@@ -102,4 +102,4 @@ p <- ggplot(noaa_station, aes(x = water_year, y = PRCP_in)) +
   p
 ```
 
-[![Water year plot](water-year-plot.png)]
+[![Water year plot](https://wcrice.github.io/2019-06-06-water-year-plots/water-year-plot.png)]
