@@ -5,7 +5,7 @@ date: "6/6/2019"
 output: html_document
 ---
 
-## Estimating Annual Precipitation and Moving Averages
+# Estimating Annual Precipitation and Moving Averages
 
 In the United States of America the common definition of a water year among hydrologists is from October 1st to September 30th. This script walks you through pulling data from the NOAA Climate Data search tool and building a graph showing annual precipitation over each water year in the dataset.
 
