@@ -21,6 +21,7 @@ library(tools)
 ```
 
 # Write a function to add a water year column (for use later in the script)
+
 ```{r}
 wtr_yr <- function(dates, start_month=9) {
   # Convert dates into POSIXlt
@@ -35,16 +36,19 @@ wtr_yr <- function(dates, start_month=9) {
 ```
 
 # Load your data file (downloaded from Noaa)
+
 ```{r}
 noaa_stations <- read.csv("~/GitHub/butte_hydro_budget/input/noaa_stations.csv", header=TRUE)
 ```
 
 # Choose what stations you want to use (useful if you downloaded multiple stations)
+
 ```{r}
 noaa_station <- subset(noaa_stations, noaa_stations$STATION == "USC00045941")
 ```
 
 # Ensure the dates are stored as dates by using as.Date()
+
 ```{r}
 noaa_station$DATE <- as.Date(noaa_station$DATE)
 ```
@@ -53,26 +57,33 @@ noaa_station$DATE <- as.Date(noaa_station$DATE)
 ```{r}
 noaa_station$water_year <- wtr_yr(noaa_station$DATE)
 ```
+
 #Add months (this isn't used in this example)
+
 ```{r}
 noaa_station$month <- months(noaa_station$DATE)
 ```
+
 #Calculate annual sums by water year
+
 ```{r}
 noaa_station <- aggregate( PRCP ~ water_year , noaa_station , sum )
 ```
 
 #Calculate precitation in inches if data was downloaded in milimeters
+
 ```{r}
 noaa_station$PRCP_in <- noaa_station$PRCP/25.4 #Multiply by 25.4 to make mm into inches (if desired)
 ```
 
 # Remove na values
+
 ```{r}
 noaa_station <- na.omit(noaa_station)
 ```
 
 # Make a plot showing a 20 year rolling mean
+
 ```{r}
 ggplot(noaa_station, aes(x = water_year, y = PRCP_in)) +
   geom_bar(stat = "identity", color="black", fill="lightsteelblue1")+
