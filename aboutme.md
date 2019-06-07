@@ -1,16 +1,11 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: Who is this guy?
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+My name is Bill Rice and I am a graduate student at the University of California, Davis. I am a geologist by trade and training but my current research revolves around water management, water policy, quantifying water budgets, and the development of Groundwater Sustainability Plans under the Sustainable Groundwater Management Act.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+### For more about SGMA
 
-What else do you need?
-
-### my history
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](http://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+If you would like to know more about the Sustainable Groundwater Management Act, visit the [California Department of Water Resources SGMA Website](https://sgma.water.ca.gov/portal/).
