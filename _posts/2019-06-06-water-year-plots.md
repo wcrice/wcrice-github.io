@@ -4,7 +4,7 @@ author: "Bill Rice"
 date: "6/6/2019"
 ---
 
-# Estimating Annual Precipitation and Moving Averages
+# Estimating Annual Precipitation and Moving Averages using R
 
 In the United States of America the common definition of a water year among hydrologists is from October 1st to September 30th. This script walks you through pulling data from the NOAA Climate Data search tool and building a graph showing annual precipitation over each water year in the dataset.
 
@@ -18,6 +18,8 @@ Start by visiting [NOAA's Climate Data Search Tool](https://www.ncdc.noaa.gov/cd
 library(ggplot2)
 library(zoo)
 library(tools)
+library(plotly)
+
 ```
 
 # Write a function to add a water year column (for use later in the script)
@@ -85,7 +87,7 @@ noaa_station <- na.omit(noaa_station)
 # Make a plot showing a 20 year rolling mean
 
 ```{r}
-ggplot(noaa_station, aes(x = water_year, y = PRCP_in)) +
+p <- ggplot(noaa_station, aes(x = water_year, y = PRCP_in)) +
   geom_bar(stat = "identity", color="black", fill="lightsteelblue1")+
   
   labs(title = "Annual Water Year Precipitation -",
@@ -96,4 +98,12 @@ ggplot(noaa_station, aes(x = water_year, y = PRCP_in)) +
                            k=20, 
                            na.pad = TRUE)), na.rm=TRUE)+
   theme_minimal()
+  
+  p
+```
+
+# Or make it interactive
+
+```{r}
+ggplotly(p)
 ```
