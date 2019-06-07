@@ -28,7 +28,7 @@ library(plotly)
 ### Write a function to add a water year column (for use later in the script)
 
 ```{r}
-wtr_yr <- function(dates, start_month=9) {
+wtr_yr <- function(dates, start_month=10) {
   # Convert dates into POSIXlt
   dates.posix = as.POSIXlt(dates)
   # Year offset
