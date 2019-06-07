@@ -9,24 +9,14 @@ output: html_document
 
 In the United States of America the common definition of a water year among hydrologists is from October 1st to September 30th. This script walks you through pulling data from the NOAA Climate Data search tool and building a graph showing annual precipitation over each water year in the dataset.
 
-Start by visiting {r}[NOAA's Climate Data Search Tool](https://www.ncdc.noaa.gov/cdo-web/search?datasetid=GHCND) and downloading a CSV formated file containing daily precipitation.
+Start by visiting [NOAA's Climate Data Search Tool](https://www.ncdc.noaa.gov/cdo-web/search?datasetid=GHCND) and downloading a CSV formated file containing daily precipitation.
 
-# Load necessary libraries
+# Load the necessary libraries
 
 ```{r}
-# library(ggplot2)
-# library(sp)
-# library(raster)
-# library(hydrogeo)
-# library(rgeos)
-# library(rgdal)
-# library(tmap)
+
 library(ggplot2)
-# library(dplyr)
-# library(lubridate)
-# library(rnoaa)
-# library(cimir)
-# library(zoo)
+library(zoo)
 library(tools)
 ```
 
