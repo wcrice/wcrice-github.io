@@ -204,134 +204,8 @@ summary {
 <div id="getting-started-with-groundwater-plots" class="section level2">
 <h2>Getting started with groundwater plots</h2>
 <p>The groundwater contouring script shown here includes many steps, functions, and several libraries.</p>
-<p>I will show the format of input spatial and</p>
+<p>First I will show the steps in creating groundwater contours using my data and at the end I will give example outputs from my data.</p>
 <p>I will not go through each line of code but I will highlight areas that you need to change your input files for use in this script or major assumptions that are made when using this script. The end result of this example looks like this:</p>
-<pre class="r"><code>head(wl_obs)</code></pre>
-<pre><code>##   stn_id          well_code wlm_id       date rp_elev_ft gp_elev_ft
-## 1  22363 414796N1223568W001 675900 2008-10-30     3344.6     3343.6
-## 2  22363 414796N1223568W001 675899 2008-04-04     3344.6     3343.6
-## 3  22363 414796N1223568W001 675897 2007-03-28     3344.6     3343.6
-## 4  22363 414796N1223568W001 675896 2006-10-19     3344.6     3343.6
-## 5  22363 414796N1223568W001 675895 2006-04-20     3344.6     3343.6
-## 6  22363 414796N1223568W001 675894 2005-10-13     3344.6     3343.6
-##   rdng_ws reading_rp_ft wse_ft rpe_wse gs_to_ws_ft wlm_qa_desc wlm_desc
-## 1       0         242.9 3101.7   242.9       241.9        &lt;NA&gt;  Unknown
-## 2       0         242.1 3102.5   242.1       241.1        &lt;NA&gt;  Unknown
-## 3       0         241.2 3103.4   241.2       240.2        &lt;NA&gt;  Unknown
-## 4       0         241.3 3103.3   241.3       240.3        &lt;NA&gt;  Unknown
-## 5       0         242.0 3102.6   242.0         241        &lt;NA&gt;  Unknown
-## 6       0         242.8 3101.8   242.8       241.8        &lt;NA&gt;  Unknown
-##                      wlm_acc_desc wlm_org_id                  wlm_org_name
-## 1 Water level accuracy is unknown          1 Department of Water Resources
-## 2 Water level accuracy is unknown          1 Department of Water Resources
-## 3 Water level accuracy is unknown          1 Department of Water Resources
-## 4 Water level accuracy is unknown          1 Department of Water Resources
-## 5 Water level accuracy is unknown          1 Department of Water Resources
-## 6 Water level accuracy is unknown          1 Department of Water Resources
-##   comments coop_agency_org_id                 coop_org_name
-## 1     &lt;NA&gt;                  1 Department of Water Resources
-## 2     &lt;NA&gt;                  1 Department of Water Resources
-## 3     &lt;NA&gt;                  1 Department of Water Resources
-## 4     &lt;NA&gt;                  1 Department of Water Resources
-## 5     &lt;NA&gt;                  1 Department of Water Resources
-## 6     &lt;NA&gt;                  1 Department of Water Resources
-##   data_table_source
-## 1  DWR_Periodic_GWL
-## 2  DWR_Periodic_GWL
-## 3  DWR_Periodic_GWL
-## 4  DWR_Periodic_GWL
-## 5  DWR_Periodic_GWL
-## 6  DWR_Periodic_GWL</code></pre>
-<pre class="r"><code>head(wl_obs)</code></pre>
-<pre><code>##   stn_id          well_code wlm_id       date rp_elev_ft gp_elev_ft
-## 1  22363 414796N1223568W001 675900 2008-10-30     3344.6     3343.6
-## 2  22363 414796N1223568W001 675899 2008-04-04     3344.6     3343.6
-## 3  22363 414796N1223568W001 675897 2007-03-28     3344.6     3343.6
-## 4  22363 414796N1223568W001 675896 2006-10-19     3344.6     3343.6
-## 5  22363 414796N1223568W001 675895 2006-04-20     3344.6     3343.6
-## 6  22363 414796N1223568W001 675894 2005-10-13     3344.6     3343.6
-##   rdng_ws reading_rp_ft wse_ft rpe_wse gs_to_ws_ft wlm_qa_desc wlm_desc
-## 1       0         242.9 3101.7   242.9       241.9        &lt;NA&gt;  Unknown
-## 2       0         242.1 3102.5   242.1       241.1        &lt;NA&gt;  Unknown
-## 3       0         241.2 3103.4   241.2       240.2        &lt;NA&gt;  Unknown
-## 4       0         241.3 3103.3   241.3       240.3        &lt;NA&gt;  Unknown
-## 5       0         242.0 3102.6   242.0         241        &lt;NA&gt;  Unknown
-## 6       0         242.8 3101.8   242.8       241.8        &lt;NA&gt;  Unknown
-##                      wlm_acc_desc wlm_org_id                  wlm_org_name
-## 1 Water level accuracy is unknown          1 Department of Water Resources
-## 2 Water level accuracy is unknown          1 Department of Water Resources
-## 3 Water level accuracy is unknown          1 Department of Water Resources
-## 4 Water level accuracy is unknown          1 Department of Water Resources
-## 5 Water level accuracy is unknown          1 Department of Water Resources
-## 6 Water level accuracy is unknown          1 Department of Water Resources
-##   comments coop_agency_org_id                 coop_org_name
-## 1     &lt;NA&gt;                  1 Department of Water Resources
-## 2     &lt;NA&gt;                  1 Department of Water Resources
-## 3     &lt;NA&gt;                  1 Department of Water Resources
-## 4     &lt;NA&gt;                  1 Department of Water Resources
-## 5     &lt;NA&gt;                  1 Department of Water Resources
-## 6     &lt;NA&gt;                  1 Department of Water Resources
-##   data_table_source
-## 1  DWR_Periodic_GWL
-## 2  DWR_Periodic_GWL
-## 3  DWR_Periodic_GWL
-## 4  DWR_Periodic_GWL
-## 5  DWR_Periodic_GWL
-## 6  DWR_Periodic_GWL</code></pre>
-<pre class="r"><code>dem_watershed</code></pre>
-<pre><code>## class      : RasterLayer 
-## dimensions : 2177, 1632, 3552864  (nrow, ncol, ncell)
-## resolution : 23.2, 30.8  (x, y)
-## extent     : -182358, -144495.6, 382879.4, 449931  (xmin, xmax, ymin, ymax)
-## crs        : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
-## source     : memory
-## names      : USGS_NED_one_arcsec_SiskiyouExtent3310 
-## values     : 818.9161, 2829.046  (min, max)</code></pre>
-<pre class="r"><code>wsh</code></pre>
-<pre><code>## class       : SpatialPolygonsDataFrame 
-## features    : 1 
-## extent      : -182349.4, -144492.3, 382882.8, 451771  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
-## variables   : 15
-## names       : OBJECTID,                                  TNMID, MetaSource, SourceData, SourceOrig, SourceFeat,   LoadDate, GNIS_ID, AreaAcres, AreaSqKm, States,     HUC8,  Name,    Shape_Leng,     Shape_Area 
-## value       :        1, {522489C1-3A24-4D0F-8F85-83A71EB7D499},         NA,         NA,         NA,         NA, 2012/06/11,       0, 388548.36,   1572.4,  CA,OR, 18010205, Butte, 2.33088722827, 0.170162999863</code></pre>
-<pre class="r"><code>basin</code></pre>
-<pre><code>## class       : SpatialPolygonsDataFrame 
-## features    : 1 
-## extent      : -178047.4, -154063.6, 416200.7, 444544.4  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
-## variables   : 7
-## names       : OBJECTID, Basin_Numb, Basin_Subb,   Basin_Name,   Basin_Su_1, Region_Off,                               GlobalID 
-## value       :      399,      1-003,      1-003, BUTTE VALLEY, BUTTE VALLEY,        NRO, {374607EF-33B2-4FA6-8118-C5C1C0B050D8}</code></pre>
-<pre class="r"><code>cities</code></pre>
-<pre><code>## class       : SpatialPolygonsDataFrame 
-## features    : 4 
-## extent      : -167802, -158731.9, 396901.3, 441209  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
-## variables   : 16
-## names       : STATEFP, PLACEFP,  PLACENS,   GEOID,    NAME,    NAMELSAD, LSAD, CLASSFP, PCICBSA, PCINECTA, MTFCC, FUNCSTAT,   ALAND, AWATER,    INTPTLAT, ... 
-## min values  :      06,   19584, 02408156, 0619584,  Dorris, Dorris city,   25,      C1,       N,        N, G4110,        A, 1819372,      0, +41.5789379, ... 
-## max values  :      06,   78176, 02410347, 0678176, Tennant, Tennant CDP,   57,      U1,       N,        N, G4210,        S,  628135,  40653, +41.9649654, ...</code></pre>
-<pre class="r"><code>hill_basin</code></pre>
-<pre><code>## class      : RasterLayer 
-## dimensions : 920, 1034, 951280  (nrow, ncol, ncell)
-## resolution : 23.2, 30.8  (x, y)
-## extent     : -178042.8, -154054, 416205, 444541  (xmin, xmax, ymin, ymax)
-## crs        : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
-## source     : memory
-## names      : layer 
-## values     : 0.1856007, 0.9998591  (min, max)</code></pre>
-<pre class="r"><code>color_cities</code></pre>
-<pre><code>## [1] &quot;#d7922d&quot;</code></pre>
-<pre class="r"><code>cities_centroid</code></pre>
-<pre><code>## class       : SpatialPointsDataFrame 
-## features    : 4 
-## extent      : -167197.3, -159499.4, 397686.6, 440097  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
-## variables   : 3
-## names       :    name, label_xmod, label_ymod 
-## min values  :  Dorris,       -1.2,       -0.5 
-## max values  : Tennant,        2.2,       -0.5</code></pre>
 </div>
 <div id="functions-to-make-contour-lines-and-spatial-objects-from-well-elevations" class="section level2">
 <h2>Functions to make contour lines and spatial objects from well elevations</h2>
@@ -574,6 +448,135 @@ gw_figure</code></pre>
 <div id="source-data" class="section level2">
 <h2>Source data</h2>
 <p>The data used in this plot comes from multiple sources but is available through the <a href="https://data.ca.gov">California Open Data Portal</a>.</p>
+</div>
+<div id="example-prints-of-data" class="section level2">
+<h2>Example prints of data</h2>
+<pre class="r"><code>head(wl_obs)</code></pre>
+<pre><code>##   stn_id          well_code wlm_id       date rp_elev_ft gp_elev_ft
+## 1  22363 414796N1223568W001 675900 2008-10-30     3344.6     3343.6
+## 2  22363 414796N1223568W001 675899 2008-04-04     3344.6     3343.6
+## 3  22363 414796N1223568W001 675897 2007-03-28     3344.6     3343.6
+## 4  22363 414796N1223568W001 675896 2006-10-19     3344.6     3343.6
+## 5  22363 414796N1223568W001 675895 2006-04-20     3344.6     3343.6
+## 6  22363 414796N1223568W001 675894 2005-10-13     3344.6     3343.6
+##   rdng_ws reading_rp_ft wse_ft rpe_wse gs_to_ws_ft wlm_qa_desc wlm_desc
+## 1       0         242.9 3101.7   242.9       241.9        &lt;NA&gt;  Unknown
+## 2       0         242.1 3102.5   242.1       241.1        &lt;NA&gt;  Unknown
+## 3       0         241.2 3103.4   241.2       240.2        &lt;NA&gt;  Unknown
+## 4       0         241.3 3103.3   241.3       240.3        &lt;NA&gt;  Unknown
+## 5       0         242.0 3102.6   242.0         241        &lt;NA&gt;  Unknown
+## 6       0         242.8 3101.8   242.8       241.8        &lt;NA&gt;  Unknown
+##                      wlm_acc_desc wlm_org_id                  wlm_org_name
+## 1 Water level accuracy is unknown          1 Department of Water Resources
+## 2 Water level accuracy is unknown          1 Department of Water Resources
+## 3 Water level accuracy is unknown          1 Department of Water Resources
+## 4 Water level accuracy is unknown          1 Department of Water Resources
+## 5 Water level accuracy is unknown          1 Department of Water Resources
+## 6 Water level accuracy is unknown          1 Department of Water Resources
+##   comments coop_agency_org_id                 coop_org_name
+## 1     &lt;NA&gt;                  1 Department of Water Resources
+## 2     &lt;NA&gt;                  1 Department of Water Resources
+## 3     &lt;NA&gt;                  1 Department of Water Resources
+## 4     &lt;NA&gt;                  1 Department of Water Resources
+## 5     &lt;NA&gt;                  1 Department of Water Resources
+## 6     &lt;NA&gt;                  1 Department of Water Resources
+##   data_table_source
+## 1  DWR_Periodic_GWL
+## 2  DWR_Periodic_GWL
+## 3  DWR_Periodic_GWL
+## 4  DWR_Periodic_GWL
+## 5  DWR_Periodic_GWL
+## 6  DWR_Periodic_GWL</code></pre>
+<pre class="r"><code>head(wl_obs)</code></pre>
+<pre><code>##   stn_id          well_code wlm_id       date rp_elev_ft gp_elev_ft
+## 1  22363 414796N1223568W001 675900 2008-10-30     3344.6     3343.6
+## 2  22363 414796N1223568W001 675899 2008-04-04     3344.6     3343.6
+## 3  22363 414796N1223568W001 675897 2007-03-28     3344.6     3343.6
+## 4  22363 414796N1223568W001 675896 2006-10-19     3344.6     3343.6
+## 5  22363 414796N1223568W001 675895 2006-04-20     3344.6     3343.6
+## 6  22363 414796N1223568W001 675894 2005-10-13     3344.6     3343.6
+##   rdng_ws reading_rp_ft wse_ft rpe_wse gs_to_ws_ft wlm_qa_desc wlm_desc
+## 1       0         242.9 3101.7   242.9       241.9        &lt;NA&gt;  Unknown
+## 2       0         242.1 3102.5   242.1       241.1        &lt;NA&gt;  Unknown
+## 3       0         241.2 3103.4   241.2       240.2        &lt;NA&gt;  Unknown
+## 4       0         241.3 3103.3   241.3       240.3        &lt;NA&gt;  Unknown
+## 5       0         242.0 3102.6   242.0         241        &lt;NA&gt;  Unknown
+## 6       0         242.8 3101.8   242.8       241.8        &lt;NA&gt;  Unknown
+##                      wlm_acc_desc wlm_org_id                  wlm_org_name
+## 1 Water level accuracy is unknown          1 Department of Water Resources
+## 2 Water level accuracy is unknown          1 Department of Water Resources
+## 3 Water level accuracy is unknown          1 Department of Water Resources
+## 4 Water level accuracy is unknown          1 Department of Water Resources
+## 5 Water level accuracy is unknown          1 Department of Water Resources
+## 6 Water level accuracy is unknown          1 Department of Water Resources
+##   comments coop_agency_org_id                 coop_org_name
+## 1     &lt;NA&gt;                  1 Department of Water Resources
+## 2     &lt;NA&gt;                  1 Department of Water Resources
+## 3     &lt;NA&gt;                  1 Department of Water Resources
+## 4     &lt;NA&gt;                  1 Department of Water Resources
+## 5     &lt;NA&gt;                  1 Department of Water Resources
+## 6     &lt;NA&gt;                  1 Department of Water Resources
+##   data_table_source
+## 1  DWR_Periodic_GWL
+## 2  DWR_Periodic_GWL
+## 3  DWR_Periodic_GWL
+## 4  DWR_Periodic_GWL
+## 5  DWR_Periodic_GWL
+## 6  DWR_Periodic_GWL</code></pre>
+<pre class="r"><code>dem_watershed</code></pre>
+<pre><code>## class      : RasterLayer 
+## dimensions : 2177, 1632, 3552864  (nrow, ncol, ncell)
+## resolution : 23.2, 30.8  (x, y)
+## extent     : -182358, -144495.6, 382879.4, 449931  (xmin, xmax, ymin, ymax)
+## crs        : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## source     : memory
+## names      : USGS_NED_one_arcsec_SiskiyouExtent3310 
+## values     : 818.9161, 2829.046  (min, max)</code></pre>
+<pre class="r"><code>wsh</code></pre>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 1 
+## extent      : -182349.4, -144492.3, 382882.8, 451771  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## variables   : 15
+## names       : OBJECTID,                                  TNMID, MetaSource, SourceData, SourceOrig, SourceFeat,   LoadDate, GNIS_ID, AreaAcres, AreaSqKm, States,     HUC8,  Name,    Shape_Leng,     Shape_Area 
+## value       :        1, {522489C1-3A24-4D0F-8F85-83A71EB7D499},         NA,         NA,         NA,         NA, 2012/06/11,       0, 388548.36,   1572.4,  CA,OR, 18010205, Butte, 2.33088722827, 0.170162999863</code></pre>
+<pre class="r"><code>basin</code></pre>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 1 
+## extent      : -178047.4, -154063.6, 416200.7, 444544.4  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## variables   : 7
+## names       : OBJECTID, Basin_Numb, Basin_Subb,   Basin_Name,   Basin_Su_1, Region_Off,                               GlobalID 
+## value       :      399,      1-003,      1-003, BUTTE VALLEY, BUTTE VALLEY,        NRO, {374607EF-33B2-4FA6-8118-C5C1C0B050D8}</code></pre>
+<pre class="r"><code>cities</code></pre>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 4 
+## extent      : -167802, -158731.9, 396901.3, 441209  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## variables   : 16
+## names       : STATEFP, PLACEFP,  PLACENS,   GEOID,    NAME,    NAMELSAD, LSAD, CLASSFP, PCICBSA, PCINECTA, MTFCC, FUNCSTAT,   ALAND, AWATER,    INTPTLAT, ... 
+## min values  :      06,   19584, 02408156, 0619584,  Dorris, Dorris city,   25,      C1,       N,        N, G4110,        A, 1819372,      0, +41.5789379, ... 
+## max values  :      06,   78176, 02410347, 0678176, Tennant, Tennant CDP,   57,      U1,       N,        N, G4210,        S,  628135,  40653, +41.9649654, ...</code></pre>
+<pre class="r"><code>hill_basin</code></pre>
+<pre><code>## class      : RasterLayer 
+## dimensions : 920, 1034, 951280  (nrow, ncol, ncell)
+## resolution : 23.2, 30.8  (x, y)
+## extent     : -178042.8, -154054, 416205, 444541  (xmin, xmax, ymin, ymax)
+## crs        : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## source     : memory
+## names      : layer 
+## values     : 0.1856007, 0.9998591  (min, max)</code></pre>
+<pre class="r"><code>color_cities</code></pre>
+<pre><code>## [1] &quot;#d7922d&quot;</code></pre>
+<pre class="r"><code>cities_centroid</code></pre>
+<pre><code>## class       : SpatialPointsDataFrame 
+## features    : 4 
+## extent      : -167197.3, -159499.4, 397686.6, 440097  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## variables   : 3
+## names       :    name, label_xmod, label_ymod 
+## min values  :  Dorris,       -1.2,       -0.5 
+## max values  : Tennant,        2.2,       -0.5</code></pre>
 </div>
 
 
