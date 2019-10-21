@@ -198,14 +198,13 @@ summary {
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
 <p>The process of generating groundwater elevation contours assumes several things. The most important step in generating groundwater contours is developing a good conceptual understanding of the hydrogeology of a region under study. The key question is “Do all the well observations represent the same aquifer system or should they be considered seperate aquifer systems?” If you determine that the wells can be treated as a single aquifer system then a single groundwater contour map makes sense but if multiple aquifer systems are represented then it is most appropriate to generate a seperate groundwater contour map for each aquifer.</p>
-<p>Several common ways to determine if wells should be considered as part of the same aquifer system are isotopic analysis, general chemistry analysis, and pumping tests. With respect to groundwater contours the pumping test is the most direct measure as the test determines how well connected wells are with one another. Essentially, how quickly water levels change in an observation well while a nearby well is pumped determines how well they are connected. If wells experience relatively rapid responses they can safely be considered part of the same aquifer for the purpose of groundwater contouring. If the observation well shows little or no change when a nearby well is pumped then it is likely part of a seperate aquifer system and should be part of a seperate groundwater contour.</p>
+<p>It is assumed that the user of this script has a strong conceptual understanding of hydrogeology.</p>
 <p>This example assumes all wells are part of the same aquifer system.</p>
 </div>
 <div id="getting-started-with-groundwater-plots" class="section level2">
 <h2>Getting started with groundwater plots</h2>
 <p>The groundwater contouring script shown here includes many steps, functions, and several libraries.</p>
-<p>First I will show the steps in creating groundwater contours using my data and at the end I will give example outputs from my data.</p>
-<p>I will not go through each line of code but I will highlight areas that you need to change your input files for use in this script or major assumptions that are made when using this script. The end result of this example looks like this:</p>
+<p>First I will show the steps in creating groundwater contours using my data and at the end I will give example outputs from my data inputs.</p>
 </div>
 <div id="functions-to-make-contour-lines-and-spatial-objects-from-well-elevations" class="section level2">
 <h2>Functions to make contour lines and spatial objects from well elevations</h2>
